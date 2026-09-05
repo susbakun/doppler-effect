@@ -16,7 +16,7 @@ fn main() {
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
                 resolution: WindowResolution::new(1600, 900).with_scale_factor_override(1.0),
-                title: "Doppler!".to_string(),
+                title: "Doppler".to_string(),
                 ..Default::default()
             }),
             ..Default::default()
