@@ -1,3 +1,4 @@
+use bevy::camera_controller::free_camera::{FreeCamera, FreeCameraPlugin};
 use bevy::input_focus::InputFocus;
 use bevy::prelude::*;
 use bevy::window::WindowResolution;
@@ -23,6 +24,7 @@ fn main() {
             }),
             ..Default::default()
         }))
+        .add_plugins(FreeCameraPlugin)
         .add_plugins(PlayPlugin)
         .run();
 }
@@ -32,9 +34,11 @@ pub fn setup(mut commands: Commands) {
     commands.spawn((
         Camera3d::default(),
         Msaa::Sample4,
+        FreeCamera::default(),
         Transform::from_translation(Vec3::new(0.0, 0.0, 0.0)).looking_at(Vec3::NEG_Z, Vec3::Y),
     ));
 
+    // light
     commands.spawn((
         DirectionalLight {
             illuminance: 20000.0,

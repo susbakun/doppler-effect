@@ -1,8 +1,10 @@
+use bevy::input::mouse::AccumulatedMouseMotion;
 use bevy::prelude::*;
 
 use crate::{
+    constants::MOUSE_SENSITIVITY,
     emitter::Emitter,
-    listener::setup_listener,
+    listener::{setup_listener, update_listener},
     model::{create_ambulance, create_road},
     movable::Movable,
 };
@@ -13,6 +15,8 @@ impl Plugin for PlayPlugin {
         app.add_systems(Startup, setup_listener)
             .add_systems(Startup, create_road)
             .add_systems(Startup, create_ambulance)
+            .add_systems(Update, mouse_look)
+            .add_systems(Update, update_listener)
             .add_systems(Update, move_ambulance);
     }
 }
@@ -24,4 +28,22 @@ fn move_ambulance(time: Res<Time>, mut query: Query<(&mut Transform, &mut Emitte
 
         emitter.get_stopwatch().tick(time.delta());
     }
+}
+
+// controlling camera using mouse
+fn mouse_look(
+    mouse_motion: Res<AccumulatedMouseMotion>,
+    mut camera: Single<&mut Transform, With<Camera3d>>,
+) {
+    let delta = mouse_motion.delta;
+
+    if delta == Vec2::ZERO {
+        return;
+    }
+
+    let yaw = -delta.x * MOUSE_SENSITIVITY;
+    let pitch = -delta.y * MOUSE_SENSITIVITY;
+
+    camera.rotate_y(yaw);
+    camera.rotate_local_x(pitch);
 }

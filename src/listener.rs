@@ -17,3 +17,11 @@ pub fn setup_listener(mut commands: Commands) {
         ],
     ));
 }
+
+pub fn update_listener(
+    mut listener: Single<&mut Transform, With<SpatialListener>>,
+    camera: Single<&Transform, (With<Camera3d>, Without<SpatialListener>)>,
+) {
+    listener.translation = camera.translation;
+    listener.rotation = camera.rotation;
+}
