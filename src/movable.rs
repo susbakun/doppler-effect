@@ -4,14 +4,12 @@ use crate::constants::AMBULANCE_SPEED;
 
 #[derive(Component)]
 pub struct Movable {
-    start: Vec3,
     speed: f32,
 }
 
 impl Movable {
-    pub fn new(start: Vec3) -> Self {
+    pub fn new() -> Self {
         Movable {
-            start,
             speed: AMBULANCE_SPEED,
         }
     }
