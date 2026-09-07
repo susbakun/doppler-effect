@@ -1,6 +1,7 @@
 use bevy::input::mouse::AccumulatedMouseMotion;
 use bevy::prelude::*;
 
+use crate::doppler::update_doppler;
 use crate::{
     constants::MOUSE_SENSITIVITY,
     emitter::Emitter,
@@ -17,14 +18,18 @@ impl Plugin for PlayPlugin {
             .add_systems(Startup, create_ambulance)
             .add_systems(Update, mouse_look)
             .add_systems(Update, update_listener)
-            .add_systems(Update, move_ambulance);
+            .add_systems(Update, move_ambulance)
+            .add_systems(Update, update_doppler);
     }
 }
 
-fn move_ambulance(time: Res<Time>, mut query: Query<(&mut Transform, &mut Emitter, &Movable)>) {
-    for (mut transform, mut emitter, object) in query.iter_mut() {
+fn move_ambulance(time: Res<Time>, mut query: Query<(&mut Transform, &mut Emitter, &mut Movable)>) {
+    for (mut transform, mut emitter, mut object) in query.iter_mut() {
         let direction = Dir3::X;
-        transform.translation += direction * object.get_speed() * time.delta_secs();
+        let velocity = direction * object.get_speed();
+
+        transform.translation += velocity * time.delta_secs();
+        object.set_velocity(velocity);
 
         emitter.get_stopwatch().tick(time.delta());
     }

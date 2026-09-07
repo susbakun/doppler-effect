@@ -1,3 +1,4 @@
+use crate::play::PlayPlugin;
 use bevy::camera_controller::free_camera::{FreeCamera, FreeCameraPlugin};
 use bevy::input_focus::InputFocus;
 use bevy::light::Skybox;
@@ -5,9 +6,8 @@ use bevy::prelude::*;
 use bevy::render::render_resource::{TextureViewDescriptor, TextureViewDimension};
 use bevy::window::WindowResolution;
 
-use crate::play::PlayPlugin;
-
 mod constants;
+mod doppler;
 mod emitter;
 mod listener;
 mod model;
