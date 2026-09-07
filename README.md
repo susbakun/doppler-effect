@@ -8,6 +8,5 @@ A [Bevy](https://bevyengine.org/) demo: move around a passing ambulance and hear
 cargo run
 ```
 
-Requires Rust and audio output.
 
 Controls: mouse to look; `WASD` to move; `Q`/`E` down/up; `Shift` to move faster; `Esc` to quit.
