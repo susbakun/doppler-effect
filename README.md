@@ -1,6 +1,6 @@
 # Doppler Effect
 
-A small [Bevy](https://bevyengine.org/) demo of the Doppler effect. An ambulance drives past you with a looping siren — move your head (camera) to hear the pitch shift as it approaches and recedes.
+A [Bevy](https://bevyengine.org/) demo: move around a passing ambulance and hear its siren shift in pitch.
 
 ## Run
 
@@ -8,10 +8,6 @@ A small [Bevy](https://bevyengine.org/) demo of the Doppler effect. An ambulance
 cargo run
 ```
 
-- **Mouse** — look around
-- **Esc** — quit
+Requires Rust and audio output.
 
-## Requirements
-
-- Rust (2024 edition)
-- Audio output
+Controls: mouse to look; `WASD` to move; `Q`/`E` down/up; `Shift` to move faster; `Esc` to quit.
